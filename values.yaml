@@ -1,0 +1,92 @@
+global:
+  imagePullPolicy: IfNotPresent
+
+app:
+  enabled: true
+  replicaCount: 2
+
+  image:
+    repository: cherrystudio/cherry-studio-enterprise-api
+    tag: 'v0.1.1'
+
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 10
+
+  env:
+    API_PORT: 3670
+    ADMIN_PORT: 3680
+    API_URL: http://cherry-studio-enterprise-api.test
+    ADMIN_APP_NAME: Cherry Studio
+    ADMIN_APP_LOGO_URL: https://raw.gitcode.com/CherryHQ/cherry-studio-enterprise/blobs/76b5582ee5ec1e1be7ac984eb9369640303acf35/logo.webp
+    JWT_SECRET: W10sInBlcm1pc3Npb25zIjpbXSwiaWF0Ij
+    DB_HOST: 1panel.cherry-ai.com
+    DB_PORT: 5432
+    DB_USERNAME: cherry-studio-enterprise-test
+    DB_PASSWORD: ar4E5YSfb7f3jSEW
+    DB_NAME: cherry-studio-enterprise-test
+    DB_TYPE: postgres
+    DB_SSL: false
+
+  persistence:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 10Gi
+    mountPath: /app/data
+
+  api:
+    service:
+      type: ClusterIP
+      port: 3670
+      targetPort: 3670
+    ingress:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: '20m'
+      hosts:
+        - host: cherry-studio-enterprise-api.test
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+
+  admin:
+    service:
+      type: ClusterIP
+      port: 3680
+      targetPort: 3680
+    ingress:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: '20m'
+      hosts:
+        - host: cherry-studio-enterprise-admin.test
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  livenessProbe:
+    httpGet:
+      path: /
+      port: api
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+
+  readinessProbe:
+    httpGet:
+      path: /
+      port: api
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 3
