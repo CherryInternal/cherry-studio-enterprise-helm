@@ -1,8 +1,20 @@
 # Cherry Studio Enterprise Helm Chart
 
-这个 Helm Chart 用于部署 Cherry Studio Enterprise 完整解决方案到 Kubernetes 集群，包括 API 服务和管理后台。
+这是 Cherry Studio Enterprise API 的官方 Helm Chart 仓库。
 
-## 特性
+## 目录结构
+
+```
+cherry-studio-enterprise-helm/
+├── helm/                    # Helm Chart 文件
+│   ├── Chart.yaml          # Chart 元数据
+│   ├── values.yaml         # 默认配置值
+│   ├── templates/          # Kubernetes 模板文件
+│   └── scripts/            # 辅助脚本
+└── README.md               # 仓库说明文档
+```
+
+## 功能特性
 
 - **双服务部署**：同时部署 API 服务和管理后台（Admin）
 - **API 服务**：基于 PostgreSQL 数据库的后端 API，支持企业级数据存储
@@ -20,6 +32,17 @@
 - Kubernetes 1.16+
 - Helm 3.0+
 - 集群中需要支持 PVC
+
+## 快速开始
+
+### 下载安装包
+
+```bash
+# 下载最新版本
+wget https://github.com/CherryHQ/cherry-studio-enterprise-helm/archive/v0.1.2.zip
+unzip v0.1.2.zip
+cd cherry-studio-enterprise-helm-0.1.2
+```
 
 ### 基本安装
 
