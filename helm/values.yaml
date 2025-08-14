@@ -7,7 +7,6 @@ app:
 
   image:
     repository: cherrystudio/cherry-studio-enterprise-api
-    tag: 'v0.1.1'
 
   autoscaling:
     enabled: true
@@ -20,6 +19,7 @@ app:
     API_URL: http://cherry-studio-enterprise-api.test
     ADMIN_APP_NAME: Cherry Studio
     ADMIN_APP_LOGO_URL: https://raw.gitcode.com/CherryHQ/cherry-studio-enterprise/blobs/76b5582ee5ec1e1be7ac984eb9369640303acf35/logo.webp
+    ADMIN_BASE_PATH: /
     JWT_SECRET: W10sInBlcm1pc3Npb25zIjpbXSwiaWF0Ij
     DB_HOST: 1panel.cherry-ai.com
     DB_PORT: 5432
