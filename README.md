@@ -39,7 +39,7 @@ cherry-studio-enterprise-helm/
 
 ```bash
 # 下载最新版本
-wget https://github.com/CherryHQ/cherry-studio-enterprise-helm/archive/v0.1.2.zip
+wget https://github.com/CherryInternal/cherry-studio-enterprise-helm/archive/v0.1.2.zip
 unzip v0.1.2.zip
 cd cherry-studio-enterprise-helm-0.1.2
 ```
